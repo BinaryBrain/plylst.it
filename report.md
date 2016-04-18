@@ -33,6 +33,7 @@ Un administrateur peut:
 - écouter n'importe quelles playlists
 - supprimer les morceaux de n'impote quelles playlists
 - supprimer n'importe quelles playlists
+- supprimer des utilisateurs
 
 Plan des itérations
 -------------------
