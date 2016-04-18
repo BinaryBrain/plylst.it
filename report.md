@@ -12,6 +12,8 @@ Schéma de base de données
 Cas d’utilisation et définition des droits des utilisateurs
 -----------------------------------------------------------
 
+![Acteurs du système](Acteurs/acteurs.png)
+
 Un visiteur peut:
 - écouter des playlists publiques
 - créer un compte
