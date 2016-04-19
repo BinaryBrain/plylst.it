@@ -29,6 +29,8 @@ En y intégrant les tables d'association pour les relations de types N-N, on obt
 Cas d’utilisation et définition des droits des utilisateurs
 -----------------------------------------------------------
 
+![Acteurs du système](Acteurs/acteurs.png)
+
 Un visiteur peut:
 - écouter des playlists publiques
 - créer un compte
@@ -69,7 +71,7 @@ Création des controlleurs de création/modification/suppression des playlists
 
 Création du système de comptes et d'administration
 Création des controlleurs de création du compte/connexion/déconnexion
-Ajout de la fonctionnalité d'écoute de playlists
+Création du système d'écoute de playlists
 
 ### Itération 4
 
