@@ -6,6 +6,15 @@ Description
 
 plylst.it (prononcé "playlist it") est un outil de création de liste de lecture musicale. Son atout principal est la conversion de musique à partir de vidéo YouTube, de morceau SoundCloud, et autres services de streaming, vers du HTML5.
 
+Fonctionnement
+--------------
+
+Un utilisateur inscrit peut créer une liste de lecture (publique ou privée) et y ajouter des morceaux. En pratique, il lui suffit d'envoyer le lien du média désiré et le serveur se charge de télécharger le fichier désigné. S'il s'agit d'une vidéo (lors d'utilisation de liens Youtube par exemple) la piste audio est extraite. Enfin, le fichier audio est transcodé de manière à en avoir plusieurs versions (en ogg et mp3 au minimum) afin de supporter le plus large panel de navigateurs.
+
+Les listes de lectures ainsi constituées peuvent être écoutées via l'interface web du site. Lors de la lecture, le navigateur du client récupère et lit un fichier musical à la fois, en récupérant dynamiquement le suivant de la liste une fois qu'une piste se termine.
+
+Un système interne d'amitiés permet à des utilisateurs de se partager les listes et il est possible de mémoriser des listes en tant que favoris.
+
 Schéma de base de données
 -------------------------
 
