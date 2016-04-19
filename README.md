@@ -32,11 +32,13 @@ Cas d’utilisation et définition des droits des utilisateurs
 ![Acteurs du système](Acteurs/acteurs.png)
 
 Un visiteur peut:
+
 - écouter des playlists publiques
 - créer un compte
 - se connecter
 
 Un utilisateur connecté peut:
+
 - créer des playlists
 - ajouter/supprimer les morceaux de ses playlists
 - écouter des playlists publiques
@@ -48,6 +50,7 @@ Un utilisateur connecté peut:
 - se déconnecter
 
 Un administrateur peut:
+
 - faire la même chose qu'un utilisateur
 - écouter n'importe quelles playlists
 - supprimer les morceaux de n'impote quelles playlists
