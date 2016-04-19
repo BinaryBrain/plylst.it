@@ -18,10 +18,16 @@ Un système interne d'amitiés permet à des utilisateurs de se partager les lis
 Schéma de base de données
 -------------------------
 
+Le diagramme UML de la base de données est le suivant:
+
+![UML](UML/uml-simplified.png)
+
+En y intégrant les tables d'association pour les relations de types N-N, on obtient:
+
+![UML](UML/uml-extended.png)
+
 Cas d’utilisation et définition des droits des utilisateurs
 -----------------------------------------------------------
-
-![Acteurs du système](Acteurs/acteurs.png)
 
 Un visiteur peut:
 - écouter des playlists publiques
@@ -44,7 +50,6 @@ Un administrateur peut:
 - écouter n'importe quelles playlists
 - supprimer les morceaux de n'impote quelles playlists
 - supprimer n'importe quelles playlists
-- supprimer des utilisateurs
 
 Plan des itérations
 -------------------
@@ -64,7 +69,7 @@ Création des controlleurs de création/modification/suppression des playlists
 
 Création du système de comptes et d'administration
 Création des controlleurs de création du compte/connexion/déconnexion
-Création du système d'écoute de playlists
+Ajout de la fonctionnalité d'écoute de playlists
 
 ### Itération 4
 
