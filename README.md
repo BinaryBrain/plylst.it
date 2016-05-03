@@ -61,22 +61,22 @@ Plan des itérations
 
 Pour le planning des itérations, nous avons choisi de commencer par les vues, base de données, controlleur bas niveau pour finalement joindre les deux bouts grâce au controlleur.
 
-### Itération 1
+### Itération 1 (10.05.2016)
 
 Création de la base de donnée et des différentes vues (statiques)
 
-### Itération 2
+### Itération 2 (17.05.2016)
 
 Système de conversion et stockage des fichiers audio
 Création des controlleurs de création/modification/suppression des playlists
 
-### Itération 3
+### Itération 3 (31.05.2016)
 
 Création du système de comptes et d'administration
 Création des controlleurs de création du compte/connexion/déconnexion
 Création du système d'écoute de playlists
 
-### Itération 4
+### Itération 4 (07.06.2016)
 
 Création du système d'ami
 Ajout de la fonctionnalité de favoris
