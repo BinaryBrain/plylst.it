@@ -10,6 +10,17 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <div class="link-left"><a href="/">Home</a></div>
+      <div class="link-left"><a href="/discover">Discover</a></div>
+      <div class="link-left"><a href="/friends">Friends</a></div>
+
+      <div class="link-right"><a href="/logout">Logout</a></div>
+      <div class="link-right"><a href="/my-playlists">My Playlists</a></div>
+      <div class="link-right"><a href="/songs/add">Add Song</a></div>
+    </nav>
+    <div id="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
