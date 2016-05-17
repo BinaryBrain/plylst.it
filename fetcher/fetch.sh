@@ -1,7 +1,9 @@
-DOWNLOAD_DIR="downloads"
-FILENAME=`date +%s%N`
+#!/bin/bash
 
-youtube-dl -o "$DOWNLOAD_DIR/$FILENAME" $@ &>> /dev/null
+DOWNLOAD_DIR="./public/downloads"
+FILENAME=$1
+
+youtube-dl -o "$DOWNLOAD_DIR/$FILENAME" $2 &>> /dev/null
 OK=$?
 
 if [ $OK -ne 0 ]

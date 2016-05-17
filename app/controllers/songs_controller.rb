@@ -28,10 +28,19 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(song_params)
+    data = ""
+    cmd = "youtube-dl -J " + song_params[:original_url] + " 2>> /dev/null"
+    IO.popen(cmd) { |f| data = f.gets }
+    metadata = JSON.parse(data)
+
+    filename = `date +%s%N | tr -d "\n"`
+    
+    value = system("/home/lyuyhn/Documents/HEIG/Semestre 6/WEBRAILS/Projet/plylst.it/fetcher/fetch.sh", filename, song_params[:original_url])
+    
+    @song = Song.new({:filename => filename, :name => metadata["title"], :original_url => song_params[:original_url]})
 
     respond_to do |format|
-      if @song.save
+      if @song.save and value
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
         format.json { render :show, status: :created, location: @song }
       else
