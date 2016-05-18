@@ -4,7 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
     has_many :playlists
-    has_and_belongs_to_many :playlists, :through => :favorites
-    has_and_belongs_to_many :users, :through => :friends
-    has_and_belongs_to_many :users, :through  => :pending_invites
+    
+    has_many :favorites
+    has_many :playlists, :through => :favorites
+    
+    has_many :friends
+    has_many :users, :through => :friends
+    
+    has_many :pending_invites
+    has_many :users, :through  => :pending_invites
 end
