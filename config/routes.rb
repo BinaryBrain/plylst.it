@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
 	root 'playlists#discover'
 	get 'my-playlists' => 'playlists#my_playlists'
 	get 'discover' => 'playlists#discover'

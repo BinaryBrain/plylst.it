@@ -14,10 +14,19 @@
       <div class="link-left"><a href="/discover">Discover</a></div>
       <div class="link-left"><a href="/friends">Friends</a></div>
 
-      <div class="link-right"><a href="/logout">Logout</a></div>
-      <div class="link-right"><a href="/my-playlists">My Playlists</a></div>
-      <div class="link-right"><a href="/songs/add">Add Song</a></div>
+      <% if user_signed_in? %>
+        <div class="link-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></div>
+        <div class="link-right"><%= link_to('Edit Account', edit_user_registration_path) %></div>
+        <div class="link-right"><%= link_to('My Playlists', my_playlists_path) %></div>
+        <div class="link-right"><%= link_to('Add Song', add_songs_path) %></div>
+      <% else %>
+        <div class="link-right"><%= link_to('Login', new_user_session_path) %></div>
+        <div class="link-right"><%= link_to('Register', new_user_registration_path) %></div>
+      <% end %>
     </nav>
+      <!-- TODO Style notice and alert-->
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
     <div id="container">
       <%= yield %>
     </div>
