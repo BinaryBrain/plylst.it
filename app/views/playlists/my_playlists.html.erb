@@ -1,10 +1,15 @@
 <h1>plylst.it</h1>
 <h2>My playlists</h2>
-<ul>
-	<li>Trash Metal</li>
-	<li>Nu Metal</li>
-	<li>Death Metal</li>
-	<li>Black Metal</li>
-</ul>
+<table>
+	<% @playlists.each do |playlist| %>
+		<tr>
+			<td><%= playlist.user_id %></td>
+			<td><%= playlist.name %></td>
+			<td><%= link_to 'Show', playlist %></td>
+			<td><%= link_to 'Edit', edit_playlist_path(playlist) %></td>
+			<td><%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	<% end %>
+</table>
 
 <%= link_to 'New playlist', new_playlist_path %>

@@ -3,7 +3,7 @@ class PlaylistsController < ApplicationController
 
   def my_playlists
     # TODO get only user's playlists
-    @category = Playlist.all
+    @playlists = current_user.playlists
   end
 
   def discover
