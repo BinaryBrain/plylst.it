@@ -12,21 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :filename %>
-    <%= f.text_field :filename %>
-  </div>
-
-  <div class="field">
-    <%= f.label :original_url %>
-    <%= f.text_field :original_url %>
+    <%= f.text_field :original_url, placeholder: "URL from YouTube/Soundcloud/etc." %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add" %>
   </div>
 <% end %>

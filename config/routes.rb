@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	root 'playlists#discover'
 	get 'my-playlists' => 'playlists#my_playlists'
 	get 'discover' => 'playlists#discover'
+	get 'songs/add' => 'songs#new'
 
 	resources :playlists do
 		collection do
