@@ -34,8 +34,8 @@ class SongsController < ApplicationController
     metadata = JSON.parse(data)
 
     filename = `date +%s%N | tr -d "\n"`
-    
-    value = system("/home/lyuyhn/Documents/HEIG/Semestre 6/WEBRAILS/Projet/plylst.it/fetcher/fetch.sh", filename, song_params[:original_url])
+
+    value = system("youtube-dl", song_params[:original_url], "-x", "--audio-format", "mp3", "-o", Dir.pwd + "/public/downloads/" + filename + ".%(ext)s")
     
     @song = Song.new({:filename => filename, :name => metadata["title"], :original_url => song_params[:original_url]})
 
