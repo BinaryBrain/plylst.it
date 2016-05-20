@@ -1,2 +1,9 @@
-<h1>plylst.it</h1>
 <h2>Discover</h2>
+
+<table>
+  <% @playlists.each do |playlist| %>
+    <tr>
+      <td><%= link_to playlist.name, playlist %></td>
+    </tr>
+  <% end %>
+</table>
