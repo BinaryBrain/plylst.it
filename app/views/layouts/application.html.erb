@@ -17,7 +17,7 @@
       <% if user_signed_in? %>
         <div class="link-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></div>
         <div class="link-right"><%= link_to('Edit Account', edit_user_registration_path) %></div>
-        <div class="link-right"><%= link_to('My Playlists', my_playlists_path) %></div>
+        <div class="link-right"><%= link_to('My Playlists', playlists_path) %></div>
         <div class="link-right"><%= link_to('Add Song', add_songs_path) %></div>
       <% else %>
         <div class="link-right"><%= link_to('Login', new_user_session_path) %></div>

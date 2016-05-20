@@ -1,11 +1,6 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
 
-  def my_playlists
-    # TODO get only user's playlists
-    @playlists = current_user.playlists
-  end
-
   def discover
     @playlists = Playlist.all
   end
@@ -13,7 +8,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.json
   def index
-    @playlists = Playlist.all
+    @playlists = current_user.playlists
   end
 
   # GET /playlists/1

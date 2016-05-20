@@ -15,7 +15,7 @@
     <%= f.text_field :original_url, placeholder: "URL from YouTube/Soundcloud/etc." %>
   </div>
 
-  <div class="field">
+  <div class="field song-checkboxes">
     <%=collection_check_boxes(:song, :playlist_ids, current_user.playlists, :id, :name)%>
   </div>
 
