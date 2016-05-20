@@ -1,0 +1,8 @@
+<h2>Favorites</h2>
+<table>
+  <% @playlists.each do |playlist| %>
+    <tr>
+      <td><%= link_to playlist.name, playlist %></td>
+    </tr>
+  <% end %>
+</table>

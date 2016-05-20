@@ -5,6 +5,20 @@ class PlaylistsController < ApplicationController
     @playlists = Playlist.all
   end
 
+  def favorite
+    if Playlist.find(params[:playlist]).users.include?(current_user)
+      Playlist.find(params[:playlist]).users.delete(current_user)
+    else
+      Playlist.find(params[:playlist]).users << current_user
+    end
+
+    render 'update_fav_btn.js'
+  end
+
+  def favorites
+    @playlists = current_user.favs
+  end
+
   # GET /playlists
   # GET /playlists.json
   def index

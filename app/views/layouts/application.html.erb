@@ -11,10 +11,12 @@
 
   <body>
     <nav>
-      <div class="link-left"><a href="/discover">Discover</a></div>
-      <div class="link-left"><a href="/friends">Friends</a></div>
+      <div class="link-left"><%= link_to('Discover', discover_playlists_path) %></div>
 
       <% if user_signed_in? %>
+        <div class="link-left"><a href="/friends">Friends</a></div>
+        <div class="link-left"><%= link_to('Favorites', playlists_favorites_path) %></div>
+
         <div class="link-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></div>
         <div class="link-right"><%= link_to('Edit Account', edit_user_registration_path) %></div>
         <div class="link-right"><%= link_to('My Playlists', playlists_path) %></div>

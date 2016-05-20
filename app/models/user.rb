@@ -6,7 +6,7 @@ class User < ApplicationRecord
     has_many :playlists
     
     has_many :favorites
-    has_many :favs, :class_name => 'Playlist', :through => :favorites
+    has_many :favs, :through => :favorites, :source => :playlist
     
     has_many :friends
     has_many :users, :through => :friends

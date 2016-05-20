@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 	root 'playlists#discover'
 	get 'discover' => 'playlists#discover'
 	get 'songs/add' => 'songs#new'
+	get 'playlists/favorite' => 'playlists#favorite' # Used to add a favorite
+	get 'playlists/favorites' => 'playlists#favorites' # Used to display favorites
 
 	resources :playlists do
 		collection do
