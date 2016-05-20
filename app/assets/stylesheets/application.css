@@ -58,7 +58,7 @@ a {
 	text-decoration: none;
 }
 
-input:not([type=submit]):not([type=file]):not([type=button]) {
+input:not([type=submit]):not([type=file]):not([type=button]):not([type=checkbox]) {
 	padding: 5px 10px;
 	background: none;
 	border: 1px solid white;
