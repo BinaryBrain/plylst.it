@@ -1,0 +1,73 @@
+#player-container {
+	background: #222;
+	width: 700px;
+	margin-bottom: 20px;
+}
+
+#nowPlay, #audiowrap, #plList li {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+#nowPlay {
+	padding-top: 20px;
+}
+
+#audiowrap {
+	padding-top: 20px;
+}
+
+audio {
+	width: 100%;
+}
+
+#npTitle {
+	float: right;
+}
+
+#npStatus {
+
+}
+
+#plList li {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#plList li:not(.plSel) {
+	cursor: pointer;
+}
+
+.plNum {
+	float: left;
+	margin-right: 10px;
+}
+
+.plLength {
+	float: right;
+	margin-left: 10px;
+}
+
+#buttons {
+	margin: 0 auto;
+	width: 120px;
+	font-size: 60px;
+}
+
+#buttons:after {
+	content: ' ';
+	clear: both;
+	display: block;
+}
+
+#btnPrev, #btnNext {
+	float: left;
+	width: 60px;
+	text-align: center;
+	cursor: pointer;
+	padding-bottom: 5px;
+}
+
+#btnPrev:hover, #btnNext:hover, .plSel, .plSel:hover {
+	background: #444;
+}

@@ -1,14 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @playlist.user_id %>
-</p>
+<h1>plylst.it</h1>
+<h2><%= @playlist.name %></h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @playlist.name %>
-</p>
+<div id="player-container">
+	<div id="nowPlay">
+		<span id="npStatus">Paused...</span>
+		<span id="npTitle"></span>
+	</div>
+	<div id="audiowrap">
+		<audio preload id="audio" controls="controls">Your browser does not support HTML5 Audio!</audio>
+	</div>
+	<div id="buttons">
+		<div id="btnPrev">&laquo;</div>
+		<div id="btnNext">&raquo;</div>
+	</div>
+	<div id="plwrap">
+		<ul id="plList" class="no-bullet">
+			<% @playlist.songs.each do |song| %>
+				<li data-filename="<%= song.filename %>" data-name="<%= song.name %>" data-id="<%= song.id %>">
+					<div class="plItem">
+						<div class="plNum"></div>
+						<div class="plLength">???</div>
+						<div class="plTitle"><%= song.name %></div>
+					</div>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+
+	<script>initPlayer()</script>
+</div>
 
 <%= link_to 'Edit', edit_playlist_path(@playlist) %> |
 <%= link_to 'Back', playlists_path %>

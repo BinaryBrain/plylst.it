@@ -107,10 +107,13 @@ ul:not(.no-bullet), ol:not(.no-bullet) {
 	padding-left: 30px;
 }
 
+.no-bullet {
+	list-style: none;
+}
+
 #container {
 	position: absolute;
 
-	right: -100px;
 	top: 30%;
 	bottom: 0;
 	left: 0;
