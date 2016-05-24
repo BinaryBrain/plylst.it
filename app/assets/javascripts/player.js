@@ -4,7 +4,18 @@ function initPlayer() {
 	var npStatus = $('#npStatus');
 	var npTitle = $('#npTitle');
 	var audioElement = $('#audio');
+	var playing = true;
 	audio = audioElement.get(0);
+
+	$(document).bind('keypress', function (event) {
+		if (event.keyCode == 32) {
+			if (playing) {
+				audio.pause();
+			} else {
+				audio.play();
+			}
+		}
+	});
 
 	$('#plList li').each(function (i) {
 		$(this).attr('data-index', i);
