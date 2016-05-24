@@ -10,9 +10,9 @@ function initPlayer() {
 	$(document).bind('keypress', function (event) {
 		if (event.keyCode == 32) {
 			if (playing) {
-				audio.pause();
+				$('#audio').pause();
 			} else {
-				audio.play();
+				$('#audio').play();
 			}
 		}
 	});
