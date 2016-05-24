@@ -11,6 +11,10 @@
 	background: #222;
 }
 
+#audiowrap {
+	height: 60px;
+}
+
 .playlist-name {
 	width: 615px;
 	white-space: nowrap;
@@ -21,7 +25,7 @@
 #plList {
 	position: absolute;
 	bottom: 0;
-	top: 313px;
+	top: 319px;
 	width: 100%;
 	overflow: auto;
 }
