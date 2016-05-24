@@ -27,11 +27,17 @@
       <% end %>
     </nav>
       <!-- TODO Style notice and alert-->
-      <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-    <div id="container">
-      <h1>plylst.it</h1>
-      <%= yield %>
-    </div>
+    <% if @isPlayer %>
+      <div id="player-container">
+        <h1>plylst.it</h1>
+        <%= yield %>
+      </div>
+    <% else %>
+      <div id="container">
+        <h1>plylst.it</h1>
+        <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>

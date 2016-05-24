@@ -1,7 +1,29 @@
 #player-container {
-	background: #222;
+	position: absolute;
+	bottom: 20px;
+	left: 100px;
+	top: 80px;
 	width: 700px;
 	margin-bottom: 20px;
+}
+
+#player-container .wrapper, #plList li {
+	background: #222;
+}
+
+.playlist-name {
+	width: 615px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#plList {
+	position: absolute;
+	bottom: 0;
+	top: 313px;
+	width: 100%;
+	overflow: auto;
 }
 
 #nowPlay, #audiowrap, #plList li {
@@ -68,6 +90,6 @@ audio {
 	padding-bottom: 5px;
 }
 
-#btnPrev:hover, #btnNext:hover, .plSel, .plSel:hover {
+#btnPrev:hover, #btnNext:hover, #plList .plSel, #plList .plSel:hover {
 	background: #444;
 }
