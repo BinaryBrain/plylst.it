@@ -8,9 +8,9 @@ class User < ApplicationRecord
     has_many :favorites
     has_many :favs, :through => :favorites, :source => :playlist
     
-    has_many :friends
-    has_many :users, :through => :friends
-    
+    has_many :friendships
+    has_many :friends, :through => :friendships
+
     has_many :pending_invites
-    has_many :users, :through  => :pending_invites
+    has_many :invites, :through => :pending_invites
 end
