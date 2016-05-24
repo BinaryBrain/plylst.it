@@ -8,7 +8,7 @@ function initPlayer() {
 	audio = audioElement.get(0);
 
 	$(document).bind('keypress', function (event) {
-		if (event.keyCode == 32 && $('#audio').get(0)) {
+		if (event.charCode == 32 && $('#audio').get(0)) {
 			if (playing) {
 				$('#audio').get(0).pause();
 			} else {
