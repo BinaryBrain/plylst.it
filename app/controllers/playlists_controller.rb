@@ -78,6 +78,23 @@ class PlaylistsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def pouet(duration)
+    if duration
+        text = ""
+        if duration > 3600
+            text += String(duration / 3600) + ":"
+            duration %= 3600
+        end
+        if duration > 60
+            text += String(duration / 60) + ":"
+            duration %= 60
+        end
+        return text + if duration < 10 then "0" + String(duration) else String(duration) end
+    end
+    return duration
+  end
+  helper_method :pouet
 
   private
     # Use callbacks to share common setup or constraints between actions.

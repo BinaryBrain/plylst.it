@@ -33,7 +33,7 @@ class SongsController < ApplicationController
 
     value = system("youtube-dl", song_params[:original_url], "-x", "--audio-format", "mp3", "-o", Dir.pwd + "/public/downloads/" + filename + ".%(ext)s")
     
-    @song = Song.new({ filename: filename, name: metadata["title"], original_url: song_params[:original_url] })
+    @song = Song.new({ filename: filename, name: metadata["title"], duration: metadata["duration"], original_url: song_params[:original_url] })
     @song.playlists << Playlist.where(id: song_params[:playlist_ids])
 
     respond_to do |format|
