@@ -3,16 +3,18 @@
 <h2 class="playlist-name"><%= @playlist.name %></h2>
 
 <div class="wrapper">
-	<div id="nowPlay">
-		<span id="npStatus">Paused...</span>
-		<span id="npTitle"></span>
-	</div>
-	<div id="audiowrap">
-		<audio preload id="audio" controls="controls">Your browser does not support HTML5 Audio!</audio>
-	</div>
-	<div id="buttons">
-		<div id="btnPrev">&laquo;</div>
-		<div id="btnNext">&raquo;</div>
+	<div class="player-head">
+		<div id="nowPlay">
+			<span id="npStatus">Paused...</span>
+			<span id="npTitle"></span>
+		</div>
+		<div id="audiowrap">
+			<audio preload id="audio" controls="controls">Your browser does not support HTML5 Audio!</audio>
+		</div>
+		<div id="buttons">
+			<div id="btnPrev">&laquo;</div>
+			<div id="btnNext">&raquo;</div>
+		</div>
 	</div>
 	<div id="plwrap">
 		<ul id="plList" class="no-bullet">

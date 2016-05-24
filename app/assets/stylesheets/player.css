@@ -11,8 +11,21 @@
 	background: #222;
 }
 
+#player-container h1 {
+	height: 61px;
+}
+
+#player-container h2 {
+	height: 42px;
+}
+
 #audiowrap {
 	height: 60px;
+}
+
+.player-head {
+	height: 176px;
+	background: #222;
 }
 
 .playlist-name {
