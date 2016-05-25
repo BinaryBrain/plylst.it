@@ -2,7 +2,11 @@ class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
 
   def discover
-    @playlists = Playlist.all
+    if user_signed_in?
+      @playlists = Playlist.topFavs.where.not(user: current_user).limit(10)
+    else
+      @playlists = Playlist.topFavs.limit(10)
+    end
   end
 
   def favorite

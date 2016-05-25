@@ -84,9 +84,9 @@ nav .link-left {
 	}
 
 nav .link-right {
-		float: right;
-		margin-left: 50px;
-	}
+	float: right;
+	margin-left: 50px;
+}
 
 nav .link-left a, nav .link-right a {
 	color: white;
@@ -103,8 +103,8 @@ nav :after {
 	clear: both;
 }
 
-p {
-	margin: 10px 0; 
+p, ul, label, input[type="text"], input[type="password"], input[type="email"] {
+	margin-bottom: 20px;
 }
 
 ul:not(.no-bullet), ol:not(.no-bullet) {
@@ -126,11 +126,13 @@ th, td {
 #container {
 	position: absolute;
 
-	top: 30%;
+	top: 80px;
 	bottom: 0;
 	left: 0;
+	right: -50px;
 
-	padding: 0 100px;
+	padding-left: 100px;
+	padding-right: 150px;
 
 	overflow: auto;
 }
