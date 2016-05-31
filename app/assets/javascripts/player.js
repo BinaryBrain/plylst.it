@@ -29,6 +29,7 @@ function initPlayer() {
 		playing = true;
 		npStatus.text('Now Playing...');
 		npTitle.text(songElements[current].attr('data-name'));
+		npTitle.attr('href', (songElements[current].attr('data-url')));
 	});
 	
 	audioElement.bind('pause', function () {

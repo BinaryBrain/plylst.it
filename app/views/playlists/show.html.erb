@@ -6,7 +6,7 @@
 	<div class="player-head">
 		<div id="nowPlay">
 			<span id="npStatus">Paused...</span>
-			<span id="npTitle"></span>
+			<a id="npTitle" target="_blank"></a>
 		</div>
 		<div id="audiowrap">
 			<audio preload id="audio" controls="controls">Your browser does not support HTML5 Audio!</audio>
@@ -19,7 +19,7 @@
 	<div id="plwrap">
 		<ul id="plList" class="no-bullet">
 			<% @playlist.songs.each do |song| %>
-				<li data-filename="<%= song.filename %>" data-name="<%= song.name %>" data-id="<%= song.id %>">
+				<li data-filename="<%= song.filename %>" data-name="<%= song.name %>" data-url="<%= song.original_url %>" data-id="<%= song.id %>">
 					<div class="plItem">
 						<div class="plNum"></div>
 						<div class="plLength"><%= pouet(song.duration) %></div>
