@@ -1,8 +1,12 @@
-<h2>Friends</h2>
-
 <p>Having friends allow you to see their private playlists and share yours.</p>
 
-<%= link_to 'Add a Friend', friends_add_path %>
+<h2>Friends</h2>
+
+<% if (@users.length == 0) %>
+	<p>You have no friend (sorry).</p>
+<% end %>
+
+<p><%= link_to 'Add a Friend', friends_add_path %></p>
 
 <table>
 	<% @users.each do |user| %>
@@ -14,6 +18,11 @@
 </table>
 
 <h2>Invites</h2>
+
+<% if (@invites.length == 0) %>
+	<p>You have no invite.</p>
+<% end %>
+
 <table>
 	<% @invites.each do |invite| %>
 		<tr>
