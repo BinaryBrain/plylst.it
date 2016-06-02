@@ -1,11 +1,24 @@
 <h2>Friends</h2>
 
-<% @users.each do |user| %>
-	<%= user.id %>) <%= user.email %><br>
-<% end %>
+<p>Having friends allow you to see their private playlists and share yours.</p>
 
+<%= link_to 'Add a Friend', friends_add_path %>
+
+<table>
+	<% @users.each do |user| %>
+		<tr>
+			<td><%= user.email %></td>
+			<td><%= link_to 'Remove', '/friends/remove/' + String(user.id) %></td>
+		</tr>
+	<% end %>
+</table>
 
 <h2>Invites</h2>
-<% @invites.each do |invite| %>
-	<%= invite.id %>) <%= invite.email %><br>
-<% end %>
+<table>
+	<% @invites.each do |invite| %>
+		<tr>
+			<td><%= invite.email %></td>
+			<td><%= link_to 'Accept', '/friends/accept/' + String(invite.id) %></td>
+		</tr>
+	<% end %>
+</table>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 	get 'playlists/favorites' => 'playlists#favorites' # Used to display favorites
 
 	get 'friends' => 'friends#show'
+	get 'friends/add' => 'friends#add'
 	get 'friends/invite/:user_id' => 'friends#invite'
 	get 'friends/accept/:user_id' => 'friends#accept'
 	get 'friends/remove/:user_id' => 'friends#remove'
