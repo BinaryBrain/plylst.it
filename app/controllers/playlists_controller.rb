@@ -3,9 +3,14 @@ class PlaylistsController < ApplicationController
 
   def discover
     if user_signed_in?
-      @playlists = Playlist.topFavs.where.not(user: current_user).limit(10)
+      public_playlists = Playlist.where.not(user: current_user).where(public: true)
+      friends_playlists = Playlist.where(user: current_user.friends).where.not(public: true)
+      
+      @playlists = public_playlists
+      @playlists.merge(friends_playlists)
+      @playlists = @playlists.topFavs
     else
-      @playlists = Playlist.topFavs.limit(10)
+      @playlists = Playlist.where(public: true).topFavs.limit(10)
     end
   end
 
