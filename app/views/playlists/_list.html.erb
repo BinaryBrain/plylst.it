@@ -1,0 +1,13 @@
+<% @playlists.each do |playlist| %>
+  <h3><%= link_to playlist.name, playlist %> &mdash; <%= link_to playlist.user.username, '/' + String(playlist.user.id) + '/playlists' %> &mdash; <%= playlist.favorites.count %> &hearts;</h3>
+
+  <ul class="no-bullet">
+    <% playlist.songs.limit(3).each do |song| %>
+      <li><%= song.name %></li>
+    <% end %>
+
+    <% if playlist.songs.count > 3 %>
+      <li>&hellip;</li>
+    <% end %>
+  </ul>
+<% end %>
