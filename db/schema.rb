@@ -18,14 +18,14 @@ ActiveRecord::Schema.define(version: 20160606151501) do
     t.integer "user_id"
   end
 
-  create_table "friends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user1_id"
-    t.integer "user2_id"
+  create_table "friendships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
   end
 
   create_table "pending_invites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "invitor_id"
-    t.integer "invitee_id"
+    t.integer "user_id"
+    t.integer "invite_id"
   end
 
   create_table "playlists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
