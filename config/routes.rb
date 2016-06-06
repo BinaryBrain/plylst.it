@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 			get :discover
 		end
 	end
-	resources :users
+
 	resources :songs do
 		collection do
 			get :add

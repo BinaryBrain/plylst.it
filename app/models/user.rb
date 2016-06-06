@@ -13,4 +13,13 @@ class User < ApplicationRecord
 
     has_many :pending_invites
     has_many :invites, :through => :pending_invites
+    
+    after_commit :set_admin
+    
+    def set_admin
+        if User.count == 1
+            puts "First account is ADMIN"
+            self.admin = true
+        end
+    end
 end
