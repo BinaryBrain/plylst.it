@@ -11,7 +11,7 @@
 <table>
 	<% @users.each do |user| %>
 		<tr>
-			<td><%= user.email %></td>
+			<td><%= link_to user.username, '/' + String(user.id) + '/playlists' %></td>
 			<td><%= link_to 'Remove', '/friends/remove/' + String(user.id) %></td>
 		</tr>
 	<% end %>
@@ -26,7 +26,7 @@
 <table>
 	<% @invites.each do |invite| %>
 		<tr>
-			<td><%= invite.email %></td>
+			<td><%= link_to invite.username, '/' + String(invite.id) + '/playlists' %></td>
 			<td><%= link_to 'Accept', '/friends/accept/' + String(invite.id) %></td>
 		</tr>
 	<% end %>

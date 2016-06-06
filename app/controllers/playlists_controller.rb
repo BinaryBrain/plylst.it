@@ -44,6 +44,11 @@ class PlaylistsController < ApplicationController
   def edit
   end
 
+  def by_user
+    @user = User.find(params[:user_id])
+    @playlists = Playlist.where(user: params[:user_id])
+  end
+
   # POST /playlists
   # POST /playlists.json
   def create
