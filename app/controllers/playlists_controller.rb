@@ -47,7 +47,7 @@ class PlaylistsController < ApplicationController
   # POST /playlists
   # POST /playlists.json
   def create
-    @playlist = Playlist.new({ name: playlist_params[:name], user_id: current_user.id })
+    @playlist = Playlist.new({ name: playlist_params[:name], user_id: current_user.id, public: playlist_params[:public]})
 
     respond_to do |format|
       if @playlist.save
@@ -109,6 +109,6 @@ class PlaylistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
-      params.require(:playlist).permit(:user_id, :name)
+      params.require(:playlist).permit(:user_id, :name, :public)
     end
 end
