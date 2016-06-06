@@ -22,7 +22,7 @@
 				<li data-filename="<%= song.filename %>" data-name="<%= song.name %>" data-url="<%= song.original_url %>" data-id="<%= song.id %>">
 					<div class="plItem">
 						<div class="plNum"></div>
-						<div class="plLength"><%= pouet(song.duration) %></div>
+						<div class="plLength"><%= format_duration(song.duration) %></div>
 						<div class="plTitle"><%= song.name %></div>
 					</div>
 				</li>
@@ -35,7 +35,7 @@
 
 <!--
 <%= link_to 'Add a song', add_songs_path() %> |
-<% if @playlist.user.id == current_user.id %>
+<% if current_user and @playlist.user.id == current_user.id %>
 	<%= link_to 'Edit', edit_playlist_path(@playlist) %> |
 <% end %>
 -->

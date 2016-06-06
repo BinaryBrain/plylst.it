@@ -5,38 +5,54 @@ class FriendsController < ApplicationController
   end
 
   def show
-    @users = current_user.friends
-    @invites = current_user.invites
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @users = current_user.friends
+        @invites = current_user.invites
+    end
   end
 
   # Invite user :user_id to be a friend
   def invite
-    User.find(params[:user_id]).invites << current_user
-    redirect_to friends_path
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        User.find(params[:user_id]).invites << current_user
+        redirect_to friends_path
+    end
   end
 
   # Accept an invite from user :user_id
   def accept
-    invites = PendingInvite.where(user_id: current_user, invite_id: params[:user_id])
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        invites = PendingInvite.where(user_id: current_user, invite_id: params[:user_id])
 
-    if invites.exists?
-      # Remove invite
-      invites.destroy_all
+        if invites.exists?
+          # Remove invite
+          invites.destroy_all
 
-      # Add firendship relation
-      User.find(params[:user_id]).friends << current_user
-      current_user.friends << User.find(params[:user_id])
+          # Add firendship relation
+          User.find(params[:user_id]).friends << current_user
+          current_user.friends << User.find(params[:user_id])
+        end
+
+        redirect_to friends_path
     end
-
-    redirect_to friends_path
   end
 
   # Remove user :user_id from friends
   def remove
-    User.find(params[:user_id]).friends.delete(current_user)
-    current_user.friends.delete(User.find(params[:user_id]))
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        User.find(params[:user_id]).friends.delete(current_user)
+        current_user.friends.delete(User.find(params[:user_id]))
 
-    redirect_to friends_path
+        redirect_to friends_path
+    end
   end
 
   private

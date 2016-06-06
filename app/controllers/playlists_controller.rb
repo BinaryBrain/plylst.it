@@ -6,43 +6,70 @@ class PlaylistsController < ApplicationController
       public_playlists = Playlist.where.not(user: current_user).where(public: true)
       friends_playlists = Playlist.where(user: current_user.friends).where.not(public: true)
       
-      @playlists = public_playlists
-      @playlists.merge(friends_playlists)
-      @playlists = @playlists.topFavs
+      ids = []
+      public_playlists.each do |id|
+        ids << id
+      end
+      friends_playlists.each do |id|
+        ids << id
+      end
+      
+      @playlists = Playlist.topFavs.where(id: ids).limit(10)
+      
     else
       @playlists = Playlist.where(public: true).topFavs.limit(10)
     end
   end
 
   def favorite
-    if Playlist.find(params[:playlist]).users.include?(current_user)
-      Playlist.find(params[:playlist]).users.delete(current_user)
+    if not user_signed_in?
+        redirect_to new_user_session_path
     else
-      Playlist.find(params[:playlist]).users << current_user
+        if Playlist.find(params[:playlist]).users.include?(current_user)
+          Playlist.find(params[:playlist]).users.delete(current_user)
+        else
+          Playlist.find(params[:playlist]).users << current_user
+        end
+        
+        render 'update_fav_btn.js'
     end
-
-    render 'update_fav_btn.js'
   end
 
   def favorites
-    @playlists = current_user.favs
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @playlists = current_user.favs
+    end
   end
 
   # GET /playlists
   # GET /playlists.json
   def index
-    @playlists = current_user.playlists
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @playlists = current_user.playlists
+    end
   end
 
   # GET /playlists/1
   # GET /playlists/1.json
   def show
-    @isPlayer = true
+    if @playlist.public or user_signed_in? and (@playlist.user == current_user or has_access(current_user, @playlist))
+        @isPlayer = true
+    else
+        redirect_to new_user_session_path
+    end
   end
 
   # GET /playlists/new
   def new
-    @playlist = Playlist.new
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @playlist = Playlist.new
+    end
   end
 
   # GET /playlists/1/edit
@@ -57,44 +84,56 @@ class PlaylistsController < ApplicationController
   # POST /playlists
   # POST /playlists.json
   def create
-    @playlist = Playlist.new({ name: playlist_params[:name], user_id: current_user.id, public: playlist_params[:public]})
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @playlist = Playlist.new({ name: playlist_params[:name], user_id: current_user.id, public: playlist_params[:public]})
 
-    respond_to do |format|
-      if @playlist.save
-        format.html { redirect_to @playlist, notice: 'Playlist was successfully created.' }
-        format.json { render :show, status: :created, location: @playlist }
-      else
-        format.html { render :new }
-        format.json { render json: @playlist.errors, status: :unprocessable_entity }
-      end
+        respond_to do |format|
+          if @playlist.save
+            format.html { redirect_to @playlist, notice: 'Playlist was successfully created.' }
+            format.json { render :show, status: :created, location: @playlist }
+          else
+            format.html { render :new }
+            format.json { render json: @playlist.errors, status: :unprocessable_entity }
+          end
+        end
     end
   end
 
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
-    respond_to do |format|
-      if @playlist.update(playlist_params)
-        format.html { redirect_to @playlist, notice: 'Playlist was successfully updated.' }
-        format.json { render :show, status: :ok, location: @playlist }
-      else
-        format.html { render :edit }
-        format.json { render json: @playlist.errors, status: :unprocessable_entity }
-      end
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        respond_to do |format|
+          if @playlist.update(playlist_params)
+            format.html { redirect_to @playlist, notice: 'Playlist was successfully updated.' }
+            format.json { render :show, status: :ok, location: @playlist }
+          else
+            format.html { render :edit }
+            format.json { render json: @playlist.errors, status: :unprocessable_entity }
+          end
+        end
     end
   end
 
   # DELETE /playlists/1
   # DELETE /playlists/1.json
   def destroy
-    @playlist.destroy
-    respond_to do |format|
-      format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
-      format.json { head :no_content }
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @playlist.destroy
+        respond_to do |format|
+          format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
+          format.json { head :no_content }
+        end
     end
   end
   
-  def pouet(duration)
+  def format_duration(duration)
     if duration
         text = ""
         if duration > 3600
@@ -109,7 +148,7 @@ class PlaylistsController < ApplicationController
     end
     return duration
   end
-  helper_method :pouet
+  helper_method :format_duration
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -120,5 +159,14 @@ class PlaylistsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
       params.require(:playlist).permit(:user_id, :name, :public)
+    end
+    
+    def has_access(user, playlist)
+        begin     
+            user.friends.find(playlist.user.id)
+        rescue ActiveRecord::RecordNotFound => e
+            return false
+        end
+        return true
     end
 end

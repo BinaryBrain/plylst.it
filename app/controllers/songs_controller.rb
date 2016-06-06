@@ -14,7 +14,11 @@ class SongsController < ApplicationController
 
   # GET /songs/new
   def new
-    @song = Song.new
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @song = Song.new
+    end
   end
 
   # GET /songs/1/edit
@@ -24,50 +28,62 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    data = ""
-    cmd = "youtube-dl -J " + song_params[:original_url] + " 2>> /dev/null"
-    IO.popen(cmd) { |f| data = f.gets }
-    metadata = JSON.parse(data)
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        data = ""
+        cmd = "youtube-dl -J " + song_params[:original_url] + " 2>> /dev/null"
+        IO.popen(cmd) { |f| data = f.gets }
+        metadata = JSON.parse(data)
 
-    filename = `date +%s%N | tr -d "\n"`
+        filename = `date +%s%N | tr -d "\n"`
 
-    value = system("youtube-dl", song_params[:original_url], "-x", "--audio-format", "mp3", "-o", Dir.pwd + "/public/downloads/" + filename + ".%(ext)s")
-    
-    @song = Song.new({ filename: filename, name: metadata["title"], duration: metadata["duration"], original_url: song_params[:original_url] })
-    @song.playlists << Playlist.where(id: song_params[:playlist_ids])
+        value = system("youtube-dl", song_params[:original_url], "-x", "--audio-format", "mp3", "-o", Dir.pwd + "/public/downloads/" + filename + ".%(ext)s")
+        
+        @song = Song.new({ filename: filename, name: metadata["title"], duration: metadata["duration"], original_url: song_params[:original_url] })
+        @song.playlists << Playlist.where(id: song_params[:playlist_ids])
 
-    respond_to do |format|
-      if @song.save and value
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
-        format.json { render :show, status: :created, location: @song }
-      else
-        format.html { render :new }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+        respond_to do |format|
+          if @song.save and value
+            format.html { redirect_to @song, notice: 'Song was successfully created.' }
+            format.json { render :show, status: :created, location: @song }
+          else
+            format.html { render :new }
+            format.json { render json: @song.errors, status: :unprocessable_entity }
+          end
+        end
     end
   end
 
   # PATCH/PUT /songs/1
   # PATCH/PUT /songs/1.json
   def update
-    respond_to do |format|
-      if @song.update(song_params)
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
-        format.json { render :show, status: :ok, location: @song }
-      else
-        format.html { render :edit }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        respond_to do |format|
+          if @song.update(song_params)
+            format.html { redirect_to @song, notice: 'Song was successfully updated.' }
+            format.json { render :show, status: :ok, location: @song }
+          else
+            format.html { render :edit }
+            format.json { render json: @song.errors, status: :unprocessable_entity }
+          end
+        end
     end
   end
 
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song.destroy
-    respond_to do |format|
-      format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
-      format.json { head :no_content }
+    if not user_signed_in?
+        redirect_to new_user_session_path
+    else
+        @song.destroy
+        respond_to do |format|
+          format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
+          format.json { head :no_content }
+        end
     end
   end
 
