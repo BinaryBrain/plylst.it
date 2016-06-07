@@ -60,7 +60,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1
   # GET /playlists/1.json
   def show
-    if @playlist.public or user_signed_in? and (@playlist.user == current_user or are_friends(current_user, @playlist.user) or current_user.admin)
+    if @playlist.public or (user_signed_in? and (@playlist.user == current_user or are_friends(current_user, @playlist.user) or current_user.admin))
         @isPlayer = true
     else
         redirect_to new_user_session_path
@@ -180,6 +180,9 @@ class PlaylistsController < ApplicationController
     end
     
     def are_friends(user, other_user)
+        if not user or not other_user
+            return false
+        end
         begin
             user.friends.find(other_user.id)
         rescue ActiveRecord::RecordNotFound => e

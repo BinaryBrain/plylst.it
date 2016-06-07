@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-    has_many :playlists
+    has_many :playlists, :dependent => :delete_all
     
     has_many :favorites
     has_many :favs, :through => :favorites, :source => :playlist
