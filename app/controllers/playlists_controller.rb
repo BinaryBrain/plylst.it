@@ -130,14 +130,14 @@ class PlaylistsController < ApplicationController
   # DELETE /playlists/1
   # DELETE /playlists/1.json
   def destroy
-    if not user_signed_in?
-        redirect_to new_user_session_path
-    else
+    if user_signed_in? and (current_user.admin or current_user == @playlist.user)
         @playlist.destroy
         respond_to do |format|
           format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
           format.json { head :no_content }
         end
+    else
+        redirect_to new_user_session_path
     end
   end
   
