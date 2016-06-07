@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 	get 'friends/accept/:user_id' => 'friends#accept'
 	get 'friends/remove/:user_id' => 'friends#remove'
     
+    get 'users' => 'users#show_users'
+    delete 'users/:id' => 'users#destroy'
+    
     delete 'playlists/:playlist_id/songs/:song_id' => 'playlists#remove_song'
 
 	resources :playlists do

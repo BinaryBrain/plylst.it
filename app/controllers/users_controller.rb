@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    if not user_signed_in?
+    if not user_signed_in? or (current_user != @user and not current_user.admin)
         redirect_to new_user_session_path
     else
         @user.destroy
@@ -50,6 +50,14 @@ class UsersController < ApplicationController
           format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
           format.json { head :no_content }
         end
+    end
+  end
+  
+  def show_users
+    if user_signed_in? and current_user.admin
+        @users = User.all
+    else
+        redirect_to new_user_session_path
     end
   end
 

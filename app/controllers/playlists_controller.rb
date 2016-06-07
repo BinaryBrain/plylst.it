@@ -16,6 +16,10 @@ class PlaylistsController < ApplicationController
       
       @playlists = Playlist.topFavs.where(id: ids).limit(10)
       
+      if current_user.admin
+        @playlists = Playlist.where.not(user: current_user)
+      end
+      
     else
       @playlists = Playlist.where(public: true).topFavs.limit(10)
     end
@@ -56,7 +60,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1
   # GET /playlists/1.json
   def show
-    if @playlist.public or user_signed_in? and (@playlist.user == current_user or has_access(current_user, @playlist))
+    if @playlist.public or user_signed_in? and (@playlist.user == current_user or are_friends(current_user, @playlist.user) or current_user.admin)
         @isPlayer = true
     else
         redirect_to new_user_session_path
@@ -78,7 +82,11 @@ class PlaylistsController < ApplicationController
 
   def by_user
     @user = User.find(params[:user_id])
-    @playlists = Playlist.where(user: params[:user_id])
+    if user_signed_in? and (current_user.admin or @user == current_user or are_friends(current_user, @user))
+        @playlists = Playlist.where(user: params[:user_id])
+    else
+        @playlists = Playlist.where(user: params[:user_id]).where(public: true)
+    end
   end
 
   # POST /playlists
@@ -134,7 +142,6 @@ class PlaylistsController < ApplicationController
   end
   
   def remove_song
-    puts "OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
     playlist = Playlist.find(params[:playlist_id])
     if user_signed_in? and playlist.user == current_user
         playlist.songs.delete(params[:song_id])
@@ -172,9 +179,9 @@ class PlaylistsController < ApplicationController
       params.require(:playlist).permit(:user_id, :name, :public)
     end
     
-    def has_access(user, playlist)
-        begin     
-            user.friends.find(playlist.user.id)
+    def are_friends(user, other_user)
+        begin
+            user.friends.find(other_user.id)
         rescue ActiveRecord::RecordNotFound => e
             return false
         end
