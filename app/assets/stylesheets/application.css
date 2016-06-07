@@ -194,3 +194,7 @@ input[type=submit] {
 	right: 47px;
 	height: 2px;
 }
+
+#spinner {
+	display: none;
+}
