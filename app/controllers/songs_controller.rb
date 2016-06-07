@@ -31,6 +31,15 @@ class SongsController < ApplicationController
     if not user_signed_in?
         redirect_to new_user_session_path
     else
+      if Song.where(original_url: song_params[:original_url]).exists?
+        @song = Song.where(original_url: song_params[:original_url]).first
+        @song.playlists << Playlist.where(id: song_params[:playlist_ids])
+
+        respond_to do |format|
+          format.html { redirect_to playlists_path, notice: 'Song was successfully created.' }
+          format.json { render :show, status: :created, location: @song }
+        end
+      else
         data = ""
         cmd = "youtube-dl -J " + song_params[:original_url] + " 2>> /dev/null"
         IO.popen(cmd) { |f| data = f.gets }
@@ -39,8 +48,9 @@ class SongsController < ApplicationController
         filename = `date +%s%N | tr -d "\n"`
 
         value = system("youtube-dl", song_params[:original_url], "-x", "--audio-format", "mp3", "-o", Dir.pwd + "/public/downloads/" + filename + ".%(ext)s")
-        
+
         @song = Song.new({ filename: filename, name: metadata["title"], duration: metadata["duration"], original_url: song_params[:original_url] })
+
         @song.playlists << Playlist.where(id: song_params[:playlist_ids])
 
         respond_to do |format|
@@ -52,6 +62,7 @@ class SongsController < ApplicationController
             format.json { render json: @song.errors, status: :unprocessable_entity }
           end
         end
+      end
     end
   end
 
