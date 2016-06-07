@@ -18,7 +18,7 @@
         <div class="link-left"><%= link_to('Favorites', playlists_favorites_path) %></div>
 
         <div class="link-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></div>
-        <% if user_signed_in? %>
+        <% if user_signed_in? and current_user.admin %>
             <div class="link-right"><%= link_to('Manage users', users_path) %></div>
         <% end %>
         <div class="link-right"><%= link_to('Edit Account', edit_user_registration_path) %></div>
