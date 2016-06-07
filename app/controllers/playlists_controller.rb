@@ -133,6 +133,17 @@ class PlaylistsController < ApplicationController
     end
   end
   
+  def remove_song
+    puts "OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
+    playlist = Playlist.find(params[:playlist_id])
+    if user_signed_in? and playlist.user == current_user
+        playlist.songs.delete(params[:song_id])
+        redirect_to playlists_url + "/" + params[:playlist_id] + "/edit"
+    else
+        redirect_to new_user_session_path
+    end
+  end
+  
   def format_duration(duration)
     if duration
         text = ""

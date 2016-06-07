@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 	get 'friends/invite/:user_id' => 'friends#invite'
 	get 'friends/accept/:user_id' => 'friends#accept'
 	get 'friends/remove/:user_id' => 'friends#remove'
+    
+    delete 'playlists/:playlist_id/songs/:song_id' => 'playlists#remove_song'
 
 	resources :playlists do
 		collection do
