@@ -1,0 +1,112 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Quicksand', sans-serif;
+
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+
+	color: white;
+
+	font-size: 16px;
+
+	background-color: black;
+	background: url(bg.jpg) no-repeat center center fixed;
+}
+
+h1, h2, h3 {
+	margin-bottom: 20px;
+}
+
+h1 {
+	font-size: 50px;
+}
+
+h2 {
+	font-size: 35px;
+}
+
+h3 {
+	font-size: 25px;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+input:not([type=submit]):not([type=file]):not([type=button]) {
+	padding: 5px 10px;
+	background: none;
+	border: 1px solid white;
+	width: 500px;
+	color: white;
+
+	font-family: 'Quicksand', sans-serif;
+}
+
+nav {
+	padding: 20px;
+	font-family: 'Quicksand', sans-serif;
+	font-size: 22px;
+
+	.link-left {
+		float: left;
+		margin-right: 50px;
+	}
+
+	.link-right {
+		float: right;
+		margin-left: 50px;
+	}
+
+	.link-left, .link-right {
+		a {
+			color: white;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&:after {
+		content: ' ';
+		display: block;
+		clear: both;
+	}
+}
+
+p {
+	margin: 10px 0; 
+}
+
+ul:not(.no-bullet), ol:not(.no-bullet) {
+	padding-left: 30px;
+}
+
+#container {
+	position: absolute;
+
+	right: -100px;
+	top: 30%;
+	bottom: 0;
+	left: 0;
+
+	padding: 0 100px;
+
+	overflow: auto;
+
+	& > * {
+		max-width: 1200px;
+	}
+}

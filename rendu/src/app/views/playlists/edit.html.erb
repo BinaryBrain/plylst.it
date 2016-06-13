@@ -1,0 +1,16 @@
+<h2>Editing Playlist</h2>
+
+<%= render 'form', playlist: @playlist %>
+
+<h3>Remove songs from this playlist</h3>
+<ul>
+    <% @playlist.songs.each do |song| %>
+        <li><strong><%= link_to "Remove: " + song.name, playlists_path + "/" + String(@playlist.id) + "/songs/" + String(song.id), method: :delete, data: { confirm: 'Delete this song?' } %></strong></li>
+    <% end %>
+    <% if @playlist.songs.size() == 0 %>
+        <p>This playlist is empty...</p>
+    <% end %>
+</ul>
+
+<%= link_to 'Show', @playlist %> |
+<%= link_to 'Back', playlists_path %>

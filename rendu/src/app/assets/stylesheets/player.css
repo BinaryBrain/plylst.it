@@ -1,0 +1,112 @@
+#player-container {
+	position: absolute;
+	bottom: 20px;
+	left: 100px;
+	top: 80px;
+	width: 700px;
+	margin-bottom: 20px;
+}
+
+#player-container .wrapper, #plList li {
+	background: #222;
+}
+
+#player-container h1 {
+	height: 61px;
+}
+
+#player-container h2 {
+	height: 42px;
+}
+
+#audiowrap {
+	height: 60px;
+}
+
+.player-head {
+	height: 176px;
+	background: #222;
+}
+
+.playlist-name {
+	width: 615px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#plList {
+	position: absolute;
+	bottom: 0;
+	top: 319px;
+	width: 100%;
+	overflow: auto;
+}
+
+#nowPlay, #audiowrap, #plList li {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+#nowPlay {
+	padding-top: 20px;
+}
+
+#audiowrap {
+	padding-top: 20px;
+}
+
+audio {
+	width: 100%;
+}
+
+#npTitle {
+	float: right;
+}
+
+#npStatus {
+
+}
+
+#plList li {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#plList li:not(.plSel) {
+	cursor: pointer;
+}
+
+.plNum {
+	float: left;
+	margin-right: 10px;
+}
+
+.plLength {
+	float: right;
+	margin-left: 10px;
+}
+
+#buttons {
+	margin: 0 auto;
+	width: 120px;
+	font-size: 60px;
+}
+
+#buttons:after {
+	content: ' ';
+	clear: both;
+	display: block;
+}
+
+#btnPrev, #btnNext {
+	float: left;
+	width: 60px;
+	text-align: center;
+	cursor: pointer;
+	padding-bottom: 5px;
+}
+
+#btnPrev:hover, #btnNext:hover, #plList .plSel, #plList .plSel:hover {
+	background: #444;
+}

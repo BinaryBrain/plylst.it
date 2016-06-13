@@ -1,0 +1,18 @@
+<% @playlists.each do |playlist| %>
+  <h3><%= link_to playlist.name, playlist %> &mdash; <%= link_to playlist.user.username, '/' + String(playlist.user.id) + '/playlists' %> &mdash; <%= playlist.favorites.count %> &hearts;</h3>
+  <ul class="no-bullet">
+    <% playlist.songs.limit(3).each do |song| %>
+      <li><%= song.name %></li>
+    <% end %>
+
+    <% if playlist.songs.count > 3 %>
+      <li>&hellip;</li>
+    <% end %>
+  </ul>
+  <% if current_user and current_user.admin %>
+    <p><%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+<% end %>
+<% if @playlists.size() == 0 %>
+<p>Nothing here...</p>
+<% end %>

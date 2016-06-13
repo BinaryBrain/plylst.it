@@ -1,0 +1,33 @@
+<p>Having friends allow you to see their private playlists and share yours.</p>
+
+<h2>Friends</h2>
+
+<% if (@users.length == 0) %>
+	<p>You have no friend (sorry).</p>
+<% end %>
+
+<p><%= link_to 'Add a Friend', friends_add_path %></p>
+
+<table>
+	<% @users.each do |user| %>
+		<tr>
+			<td><%= link_to user.username, '/' + String(user.id) + '/playlists' %></td>
+			<td><%= link_to 'Remove', '/friends/remove/' + String(user.id) %></td>
+		</tr>
+	<% end %>
+</table>
+
+<h2>Invites</h2>
+
+<% if (@invites.length == 0) %>
+	<p>You have no invite.</p>
+<% end %>
+
+<table>
+	<% @invites.each do |invite| %>
+		<tr>
+			<td><%= link_to invite.username, '/' + String(invite.id) + '/playlists' %></td>
+			<td><%= link_to 'Accept', '/friends/accept/' + String(invite.id) %></td>
+		</tr>
+	<% end %>
+</table>

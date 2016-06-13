@@ -1,0 +1,41 @@
+<%= link_to '♥', playlists_favorite_path(playlist: @playlist), id: "fav", class: (@playlist.users.include?(current_user) ? 'active' : ''), remote: true %>
+
+<h2 class="playlist-name"><%= @playlist.name %></h2>
+
+<div class="wrapper">
+	<div class="player-head">
+		<div id="nowPlay">
+			<span id="npStatus">Paused...</span>
+			<a id="npTitle" target="_blank"></a>
+		</div>
+		<div id="audiowrap">
+			<audio preload id="audio" controls="controls">Your browser does not support HTML5 Audio!</audio>
+		</div>
+		<div id="buttons">
+			<div id="btnPrev">&laquo;</div>
+			<div id="btnNext">&raquo;</div>
+		</div>
+	</div>
+	<div id="plwrap">
+		<ul id="plList" class="no-bullet">
+			<% @playlist.songs.each do |song| %>
+				<li data-filename="<%= song.filename %>" data-name="<%= song.name %>" data-url="<%= song.original_url %>" data-id="<%= song.id %>">
+					<div class="plItem">
+						<div class="plNum"></div>
+						<div class="plLength"><%= format_duration(song.duration) %></div>
+						<div class="plTitle"><%= song.name %></div>
+					</div>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+<script>initPlayer()</script>
+
+<!--
+<%= link_to 'Add a song', add_songs_path() %> |
+<% if current_user and @playlist.user.id == current_user.id %>
+	<%= link_to 'Edit', edit_playlist_path(@playlist) %> |
+<% end %>
+-->

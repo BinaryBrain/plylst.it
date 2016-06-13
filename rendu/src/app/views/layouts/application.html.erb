@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PlylstIt</title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+  </head>
+
+  <body>
+    <nav>
+      <div class="link-left"><%= link_to('Discover', discover_playlists_path) %></div>
+
+      <% if user_signed_in? %>
+        <div class="link-left"><a href="/friends">Friends</a></div>
+        <div class="link-left"><%= link_to('Favorites', playlists_favorites_path) %></div>
+
+        <div class="link-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></div>
+        <% if user_signed_in? and current_user.admin %>
+            <div class="link-right"><%= link_to('Manage users', users_path) %></div>
+        <% end %>
+        <div class="link-right"><%= link_to('Edit Account', edit_user_registration_path) %></div>
+        <div class="link-right"><%= link_to('My Playlists', playlists_path) %></div>
+        <div class="link-right"><%= link_to('Add Song', add_songs_path) %></div>
+      <% else %>
+        <div class="link-right"><%= link_to('Login', new_user_session_path) %></div>
+        <div class="link-right"><%= link_to('Register', new_user_registration_path) %></div>
+      <% end %>
+    </nav>
+    <% if @isPlayer %>
+      <div id="player-container">
+        <h1>plylst.it</h1>
+        <%= yield %>
+      </div>
+    <% else %>
+      <div id="container">
+        <h1>plylst.it</h1>
+        <%= yield %>
+      </div>
+    <% end %>
+  </body>
+</html>

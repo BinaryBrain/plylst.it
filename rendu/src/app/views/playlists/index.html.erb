@@ -1,0 +1,13 @@
+<h2>My playlists</h2>
+
+<table>
+  <% @playlists.each do |playlist| %>
+    <tr>
+      <td><%= link_to playlist.name, playlist %></td>
+      <td><%= link_to 'Edit', edit_playlist_path(playlist) %></td>
+      <td><%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Create a new playlist', new_playlist_path %>
