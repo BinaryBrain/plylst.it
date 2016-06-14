@@ -1,5 +1,5 @@
 <h2>Add a Friend</h2>
 
 <% @users.each do |user| %>
-	<%= link_to user.email, '/friends/invite/' + String(user.id) %><br>
+	<%= link_to user.username, '/friends/invite/' + String(user.id) %><br>
 <% end %>
