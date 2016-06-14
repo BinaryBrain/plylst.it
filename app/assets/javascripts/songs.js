@@ -1,5 +1,5 @@
 $(function () {
-	$('#new_song').bind('submit', function (event) {
+	$(document).on('submit', '#new_song', function (event) {
 		startSpinner();
 	})
 })
