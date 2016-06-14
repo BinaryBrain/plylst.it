@@ -1,0 +1,1 @@
+$(function(){$("#new_song").bind("submit",function(){startSpinner()})});

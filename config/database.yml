@@ -49,6 +49,4 @@ test:
 #
 production:
   <<: *default
-  database: plylst_it_production
-  username: plylst_it
-  password: <%= ENV['PLYLST_IT_DATABASE_PASSWORD'] %>
+  database: plylst_it
